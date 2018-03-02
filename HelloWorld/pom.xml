@@ -70,7 +70,39 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <version>1.7</version>
+        <executions>
+          <execution>
+            <phase>generate-sources</phase>
+            <configuration>
+              <tasks>
+ 
+                <!-- Older style. Not what is in repo on GitHub. -->
+            <target name="jenkins-glassfish-deploy"
+                description="Clean, build, test and deploy application to GlassFish">
+                <antcall target="clean"/>
+                <antcall target="default"/>
+                <antcall target="test"/>
+                <exec failonerror="true" executable="cmd" description="Deploy to GlassFish">
+                <arg value="/c" />
+                <arg value="asadmin --echo=true --host=172.17.0.3 --port=4848 --user=admin
+                --passwordfile=pwdfile_domain1 --secure=false
+            deploy --force=true --HelloWorld --contextroot=/HelloWorld dist\HelloWorld.war" />
+                </exec>
+            </target>
+ 
+              </tasks>
+            </configuration>
+            <goals>
+              <goal>run</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
         </plugins>
+        
     </build>
 
 </project>
