@@ -1,5 +1,5 @@
 FROM jenkinsci/jenkins:lts
-MAINTAINER shashikant.jagtap@aol.co.uk
+MAINTAINER Yannick
 # Prep Jenkins Directorieos
 
 USER root
