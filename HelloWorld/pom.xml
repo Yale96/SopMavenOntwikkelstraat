@@ -71,36 +71,43 @@
                 </executions>
             </plugin>
             <plugin>
-        <artifactId>maven-antrun-plugin</artifactId>
-        <version>1.7</version>
-        <executions>
-          <execution>
-            <phase>generate-sources</phase>
-            <configuration>
-              <tasks>
- 
-                <!-- Older style. Not what is in repo on GitHub. -->
-            <target name="jenkins-glassfish-deploy"
-                description="Clean, build, test and deploy application to GlassFish">
-                <antcall target="clean"/>
-                <antcall target="default"/>
-                <antcall target="test"/>
-                <exec failonerror="true" executable="cmd" description="Deploy to GlassFish">
-                <arg value="/c" />
-                <arg value="asadmin --echo=true --host=172.17.0.3 --port=4848 --user=admin
-                --passwordfile=pwdfile_domain1 --secure=false
-            deploy --force=true --HelloWorld --contextroot=/HelloWorld dist\HelloWorld.war" />
-                </exec>
-            </target>
- 
-              </tasks>
-            </configuration>
-            <goals>
-              <goal>run</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
+			<groupId>org.codehaus.cargo</groupId>
+			<artifactId>cargo-maven2-plugin</artifactId>
+			<version>1.3.3</version>
+			<configuration>
+				<container>
+					<containerId>glassfish3x</containerId>
+					<type>remote</type>
+				</container>
+				<configuration>
+					<type>runtime</type>
+					<properties>
+						<cargo.hostname>172.17.0.3</cargo.hostname>
+						<cargo.remote.username>admin</cargo.remote.username>
+						<cargo.remote.password>a03ab2ee</cargo.remote.password>
+						<cargo.remote.port>4848</cargo.remote.port>
+						<cargo.glassfish.domain.name>domain1</cargo.glassfish.domain.name>
+					</properties>
+				</configuration>
+				<deployables>
+					<deployable>
+						<groupId>${project.groupId}</groupId>
+						<artifactId>${project.artifactId}</artifactId>
+						<type>war</type>
+						<properties>
+							<context>/myapp</context>
+						</properties>
+					</deployable>
+				</deployables>
+			</configuration>
+			<dependencies>
+				<dependency>
+					<groupId>org.glassfish.deployment</groupId>
+					<artifactId>deployment-client</artifactId>
+					<version>3.2-b06</version>
+				</dependency>
+			</dependencies>
+		</plugin>
         </plugins>
         
     </build>
