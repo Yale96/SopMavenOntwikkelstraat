@@ -14,6 +14,19 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     
+    <distributionManagement>
+        <repository>
+            <id>central</id>
+            <name>artifactory-releases</name>
+            <url>http://192.168.25.78:8081/artifactory/libs-release</url>
+        </repository>
+        <snapshotRepository>
+            <id>snapshots</id>
+            <name>artifactory-snapshots</name>
+            <url>http://192.168.25.78:8081/artifactory/libs-snapshot</url>
+        </snapshotRepository>
+    </distributionManagement>
+ 
     <dependencies>
         <dependency>
             <groupId>javax</groupId>
