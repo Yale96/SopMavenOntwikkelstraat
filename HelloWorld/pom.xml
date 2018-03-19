@@ -18,12 +18,12 @@
         <repository>
             <id>central</id>
             <name>artifactory-releases</name>
-            <url>http://192.168.25.78:8081/artifactory/libs-release</url>
+            <url>http://172.17.0.1:8081/artifactory/libs-release</url>
         </repository>
         <snapshotRepository>
             <id>snapshots</id>
             <name>artifactory-snapshots</name>
-            <url>http://192.168.25.78:8081/artifactory/libs-snapshot</url>
+            <url>http://172.17.0.1:8081/artifactory/libs-snapshot</url>
         </snapshotRepository>
     </distributionManagement>
  
